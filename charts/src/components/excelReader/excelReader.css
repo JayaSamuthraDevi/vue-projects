@@ -1,0 +1,21 @@
+.input-container{
+    display: flex;
+    flex-direction: column;
+}
+.upload-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height:30px;
+    border: 2px dashed #000;
+}
+input{
+    display: none;
+}
