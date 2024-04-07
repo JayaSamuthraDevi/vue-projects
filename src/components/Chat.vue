@@ -1,5 +1,5 @@
 <template>
-  <div class="container-sm mt-20">
+  <div class="container-sm mt-20" v-if="isLogin">
     <div class="mx-5">
       <Message
         v-for="{ id, text, userPhotoURL, userName, userId } in messages"
@@ -28,36 +28,37 @@
 </template>
 
 <script>
-import { ref, watch, nextTick } from 'vue'
-import { useAuth, useChat } from '@/firebase'
+import { ref, watch, nextTick } from 'vue';
+import { useAuth, useChat } from '@/firebase';
 
-import SendIcon from './SendIcon.vue'
-import Message from './Message.vue'
+import SendIcon from './SendIcon.vue';
+import Message from './Message.vue';
 
 export default {
   components: { Message, SendIcon },
   setup() {
-    const { user, isLogin } = useAuth()
-    const { messages, sendMessage } = useChat()
+    const { user, isLogin  } = useAuth();
+    const { messages, sendMessage } = useChat();
 
-    const bottom = ref(null)
+    const bottom = ref(null);
     watch(
       messages,
       () => {
         nextTick(() => {
-          bottom.value?.scrollIntoView({ behavior: 'smooth' })
-        })
+          bottom.value?.scrollIntoView({ behavior: 'smooth' });
+        });
+        
       },
       { deep: true }
-    )
+    );
 
-    const message = ref('')
+    const message = ref('');
     const send = () => {
-      sendMessage(message.value)
-      message.value = ''
-    }
+      sendMessage(message.value);
+      message.value = '';
+    };
 
-    return { user, isLogin, messages, bottom, message, send }
-  }
-}
+    return { user, isLogin, messages, bottom, message, send };
+  },
+};
 </script>
